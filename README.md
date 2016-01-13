@@ -1,4 +1,4 @@
-# simple-pixel
+# simple-pixel-server
 A simple pixel server.
 
 ## Build
