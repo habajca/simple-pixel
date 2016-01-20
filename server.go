@@ -7,6 +7,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 )
@@ -58,5 +59,9 @@ func main() {
 	router := httprouter.New()
 	router.GET("/", Index)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	port := "8080"
+	if len(os.Args) >= 2 {
+		port = os.Args[1]
+	}
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
