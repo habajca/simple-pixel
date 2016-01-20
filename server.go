@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/habajca/simple-log-search/util"
 	"github.com/julienschmidt/httprouter"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -52,7 +53,14 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 	fmt.Println(string(bytes))
+
+	imgBytes, err := ioutil.ReadFile("tracking.gif")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	w.WriteHeader(http.StatusOK)
+	w.Write(imgBytes)
 }
 
 func main() {
